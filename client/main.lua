@@ -36,50 +36,47 @@ end)
 end
 
 if Config.Target and not Config.DrawText then
-onInteract = function(targetName,optionName,vars,entityHit)
-    local tony = vars
-    if optionName == "open_locker" then
-        ESX.TriggerServerCallback("ts-lockers:getLockers", function(data) 
-            TriggerServerEvent('ts-lockers:LoadStashes')
-            TriggerEvent("ts-lockers:OpenMenu", {locker = tony.index, info = data})
-        end, tony.index)
-    end
-end
-
-Citizen.CreateThread(function()
-    for k, v in pairs(Config.LockerZone) do
-        exports["fivem-target"]:AddTargetPoint({
-            name = k.."Target",
-            label = "TKRP Lockers",
-            icon = "fas fa-archive",
-            point = vec3(v.x,v.y,v.z),
-            interactDist = 2.5,
-            onInteract = onInteract,
-            options = {
+    Citizen.CreateThread(function()
+        for k, v in pairs(Config.LockerZone) do
+            RegisterNetEvent('ts-lockers:qtargetevent')
+            AddEventHandler('ts-lockers:qtargetevent', function()
+                ESX.TriggerServerCallback("ts-lockers:getLockers", function(data) 
+                    TriggerServerEvent('ts-lockers:LoadStashes')
+                    TriggerEvent("ts-lockers:OpenMenu", {locker = k, info = data})
+                end, k)
+            end)
+            exports.qtarget:AddBoxZone(k.."Target",vec3(v.x,v.y,v.z) , 0.5, 0.5, {
+                name=k.."Target",
+                heading=11.0,
+                debugPoly=false,
+                minZ= -50.77834,
+                maxZ=100.87834,
+                }, 
               {
-                name = "open_locker",
-                label = "Open Locker Menu"
-              },          
-            },
-            vars = {
-              index = k
-            }
-          })
-        exports["tony_peds"]:NewPed(`cs_casey`, k, {
-            coords = vector3(v.x,v.y,v.z),
-            radius = 50.0,
-            heading = v.w,
-            useZ = true,
-            debug = false
-        }, {
-            invincible = true,
-            canMove = true,
-            ignorePlayer = true
-        })
-    end
-end)
-
+                options = {
+                  {
+                    event = 'ts-lockers:qtargetevent' ,
+                    icon = "fas fa-sign-in-alt",
+                    label = "Open Locker Menu" ,
+                  },
+                },
+              distance = 2.5
+            })
+            exports["nihal_peds"]:NewPed(`cs_casey`, k, {
+                coords = vector3(v.x,v.y,v.z),
+                radius = 50.0,
+                heading = v.w,
+                useZ = true,
+                debug = false
+            }, {
+                invincible = true,
+                canMove = true,
+                ignorePlayer = true
+            })
+        end
+    end)
 end
+
 
 RegisterNetEvent("ts-lockers:OpenMenu", function(data)
 	lib.registerContext({
