@@ -94,7 +94,7 @@ RegisterNetEvent('ts-lockers:server:ChangePass', function(lid, pass)
 end)
 
 AddEventHandler('onServerResourceStart', function(resourceName)
-    if resourceName == 'ts-lockers' or resourceName == GetCurrentResourceName() then
+    if resourceName == 'ex-lockers' or resourceName == GetCurrentResourceName() then
         while GetResourceState('ox_inventory') ~= 'started' do Wait(50) end
         exports.oxmysql:query('SELECT * FROM tslockers', {}, function(result)
             if result[1] then
