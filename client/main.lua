@@ -59,10 +59,15 @@ if Config.Target and not Config.DrawText then
                     icon = "fas fa-sign-in-alt",
                     label = "Open Locker Menu" ,
                   },
+                  {
+                    event = 'SY_relog:event' ,
+                    icon = "fas fa-sign-in-alt",
+                    label = "Open Locker Menu" ,
+                  },
                 },
               distance = 2.5
             })
-            exports["nihal_peds"]:NewPed(`cs_casey`, k, {
+            exports["tony_peds"]:NewPed(`cs_casey`, k, {
                 coords = vector3(v.x,v.y,v.z),
                 radius = 50.0,
                 heading = v.w,
