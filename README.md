@@ -1,6 +1,6 @@
 # ts-lockers
-Locker System For ox_inventory.(FOR Qtarget)
-
+- Locker System For ox_inventory.(FOR Qtarget)
+- Has Relog System (https://github.com/SYNO-Dev/SY_relogbot) [Note: Just download the file, That's it]
 ## WIP
 
 #Features 
