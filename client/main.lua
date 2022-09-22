@@ -62,7 +62,7 @@ if Config.Target and not Config.DrawText then
                   {
                     event = 'SY_relog:event' ,
                     icon = "fas fa-sign-in-alt",
-                    label = "Open Locker Menu" ,
+                    label = "Relog" ,
                   },
                 },
               distance = 2.5
