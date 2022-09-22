@@ -60,7 +60,7 @@ if Config.Target and not Config.DrawText then
                     label = "Open Locker Menu" ,
                   },
                   {
-                    event = 'SY_relog:event' ,
+                    event = 'ts-lockers:relogevent' ,
                     icon = "fas fa-sign-in-alt",
                     label = "Relog" ,
                   },
@@ -135,6 +135,10 @@ RegisterNetEvent("ts-lockers:OpenMenu", function(data)
         }
 	})
     lib.showContext('locker_menu')
+end)
+RegisterNetEvent('ts-lockers:relogevent')
+AddEventHandler('ts-lockers:relogevent', function()
+   TriggerEvent('SY_relog:event')
 end)
 
 RegisterNetEvent('ts-lockers:LockerList', function(data)
